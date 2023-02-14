@@ -1,6 +1,7 @@
 const btnSend = document.querySelector(".btn-send");
 const btnLocation = document.querySelector(".btn-location");
 const messageToServer = document.querySelector(".message");
+const chatMessage = document.querySelector(".chat-message");
 const yourMessage = document.querySelector(".your-message");
 const serverMessage = document.querySelector(".server-message");
 const locationMessage = document.querySelector(".location-message");
@@ -18,14 +19,32 @@ const webSocket = new WebSocket(
 webSocket.onmessage = function (event) {
   if (!event.data.includes("https://www.openstreetmap.org/#map=18/")) {
     serverMessage.style.display = "flex";
-    serverMessage.innerHTML = `Server message: ${event.data}`;
+
+    const serverAvatar = document.createElement("div");
+  const serverAvatarText = document.createTextNode("S");
+  serverAvatar.appendChild(serverAvatarText);
+  serverAvatar.classList.add("avatar");
+  
+  
+
+    serverMessage.innerHTML = `${event.data}`;
+    serverMessage.prepend(serverAvatar);
+    
   }
 };
 
 const sendToServer = function () {
   const message = messageToServer.value;
   yourMessage.style.display = "flex";
-  yourMessage.innerHTML = `User message: ${message}`;
+
+  const userAvatar = document.createElement("div");
+  const userAvatarText = document.createTextNode("U");
+  userAvatar.appendChild(userAvatarText);
+  userAvatar.classList.add("avatar");
+
+  yourMessage.innerHTML = `${message}`;
+  yourMessage.appendChild(userAvatar);
+
   webSocket.send(`${message}`);
   messageToServer.value = "";
 };

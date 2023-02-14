@@ -94,6 +94,17 @@ body {
     align-self: flex-start;
   }
 
+  .avatar {
+    margin: 5px;
+    background-color: #674188;
+    border-radius: 50%;
+    min-width: 20px;
+    height: 20px;
+    text-align: center;
+    color: #fffbf5;
+    font-family: "Roboto", sans-serif;
+  }
+
   a {
     text-decoration: none;
     color: #674188;
